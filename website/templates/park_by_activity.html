@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+
+{% extends "base.html" %}Find Activity{% block title %}{{park_name}} Info{% endblock %} {% block
+content %}
+
+
+
+<html lang="en">
+<head>
+    <br>
+    <br>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js">
+  </script>
+
+
+    <center><h1 style="color:white"> Find Parks Based on Activity </h1></center>
+    <br>
+    <br>
+    <meta charset="UTF-8">
+    <style>
+        .list-group{
+    max-height: 300px;
+    margin-bottom: 10px;
+    overflow:scroll;
+    -webkit-overflow-scrolling: touch;
+}
+    </style>
+
+</head>
+<body>
+
+<div class="container">
+  <input class="form-control" id="myInput" type="text" placeholder="Search..">
+  <br>
+  <ul class="list-group" id="myList">
+      {% for activity in range(activities|length) %}
+    <li class="list-group-item">{{activities[activity]}}</li>
+              {% endfor %}
+
+  </ul>
+
+
+</div>
+
+
+<script>
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myList li").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+</script>
+
+
+
+</body>
+</html>
+{% endblock %}

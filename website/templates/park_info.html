@@ -1,25 +1,30 @@
-{% extends "base.html" %}
-{% block title %} NPS Information Center {% endblock %}
+{% extends "base.html" %} {% block title %}{{park_name}} Info{% endblock %} {% block
+content %}
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>PTEdfef</title>
 
 
-
+<br><br>
 </head>
 <body>
 <div class="card" style="width: 80;">
-  <img class="card-img-top" src="..." alt="Card image cap">
+  <img class="card-img-top" src="{{park_pic}}" alt="Card image cap">
   <div class="card-body">
-    <h5 class="card-title">{{park_name}}</h5>
-    <p class="card-text">{{park_bio}}</p>
+      <h5 class="card-title">{{park_name}} National Park <br> <small>{{city}}, {{state}}</small><br>
+      <small>Average Ticket Price: ${{avg_cost}}</small></h5>
+    <p class="card-text">{{park_description}}
+    <br>
+    </p>
 
       <!--Map of park -->
-      <
-    <a href="#" class="btn btn-primary">Go somewhere</a>
+
+    <a href="{{directions_url}}" class="btn btn-primary">Directions</a>
   </div>
 </div>
 
 </body>
 </html>
+
+{% endblock %}

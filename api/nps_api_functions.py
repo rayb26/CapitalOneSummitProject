@@ -17,7 +17,6 @@ def find_park_from_keyword(keyword):
         park_urls.append(request['data'][0]['parks'][data]['url'])
         park_code_list.append(request['data'][0]['parks'][data]['parkCode'])
 
-        # print(request['data'][0]['parks'][data]['fullName'])
     return {
 
         "park_name": park_list,
@@ -45,11 +44,19 @@ def get_coordinates(park_code):
 def get_park_profile(park_code):
     api_request_link = 'https://developer.nps.gov/api/v1/parks?q={}&limit=1000{}'.format(park_code, api_key)
     request = requests.get(api_request_link).json()
-    park_description = request['data'][1]['description']
-    print(request['data'][1]['images'][0]['url'])
+    try:
+        park_description = request['data'][1]['description']
+        city = request['data'][1]['addresses'][0]['city']
+        state = request['data'][1]['addresses'][0]['stateCode']
+        park_pic = request['data'][1]['images'][0]['url']
+
+    except IndexError:
+        park_description = request['data'][0]['description']
+        city = request['data'][0]['addresses'][0]['city']
+        state = request['data'][0]['addresses'][0]['stateCode']
+        park_pic = request['data'][0]['images'][0]['url']
 
     entrance_fees_arr_length = len(request['data'][0]['entranceFees'])
-    print(entrance_fees_arr_length)
     sum = 0
     counter = 0
     for each_cost_field in range(entrance_fees_arr_length):
@@ -61,12 +68,21 @@ def get_park_profile(park_code):
 
     return {
         "park_description": park_description,
+        "park_name": request['data'][0]['name'],
         "avg_cost": round(avg_cost),
         "directions_url": request['data'][0]['directionsUrl'],
-        "city": request['data'][1]['addresses'][0]['city'],
-        "state": request['data'][1]['addresses'][0]['stateCode'],
-        "park_pic": request['data'][1]['images'][0]['url']
+        "city": city,
+        "state": state,
+        "park_pic": park_pic
     }
 
+def get_activities():
+    api_request_link = 'https://developer.nps.gov/api/v1/activities?{}'.format(api_key)
+    request = requests.get(api_request_link).json()
+    activities = []
 
-get_park_profile('acad')
+    for activity in range(len(request['data'])):
+        activities.append(request['data'][activity]['name'])
+
+    return activities
+
