@@ -1,5 +1,5 @@
 from unittest import TestCase
-from api.nps_api_functions import find_park_from_keyword, get_coordinates, get_park_profile, get_activities
+from api.nps_api_functions import find_park_from_keyword, get_coordinates, get_park_profile, get_activities, get_parks
 
 
 class Test(TestCase):
@@ -39,6 +39,15 @@ class Test(TestCase):
         assert 'Swimming' in activity_list
         assert 'Skiing' in activity_list
         assert 'Canyoneering' in activity_list
+
+    def test_get_parks(self):
+        parks_list = get_parks()
+
+        assert 'Biscayne National Park' in str(parks_list)
+        assert len(parks_list) > 10
+        assert 'Abraham Lincoln Birthplace National Historical Park' in str(parks_list)
+
+
 
 
 

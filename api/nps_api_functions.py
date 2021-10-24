@@ -1,6 +1,4 @@
 import requests
-from bs4 import BeautifulSoup
-import urllib.request
 
 api_key = '&api_key=6uJcmYK3Buc4KNEaeKcbzh7PRwjD1bN7zJX2Maxo'
 
@@ -35,11 +33,11 @@ def get_coordinates(park_code):
     }
 
 
-# def grab_webcam_metadata(park_code):
-#     api_request_link = 'https://developer.nps.gov/api/v1/webcams?q={}{}'.format(park_code, api_key)
-#     request = requests.get(api_request_link).json()
-#     print(str(request['data'][2]['images'][0]['url']))
-#
+def grab_webcam_metadata(park_code):
+    api_request_link = 'https://developer.nps.gov/api/v1/webcams?q={}{}'.format(park_code, api_key)
+    request = requests.get(api_request_link).json()
+    print(str(request['data'][0]))
+
 
 def get_park_profile(park_code):
     api_request_link = 'https://developer.nps.gov/api/v1/parks?q={}&limit=1000{}'.format(park_code, api_key)
@@ -76,6 +74,7 @@ def get_park_profile(park_code):
         "park_pic": park_pic
     }
 
+
 def get_activities():
     api_request_link = 'https://developer.nps.gov/api/v1/activities?{}'.format(api_key)
     request = requests.get(api_request_link).json()
@@ -86,3 +85,16 @@ def get_activities():
 
     return activities
 
+
+def get_parks():
+    api_request_link = 'https://developer.nps.gov/api/v1/parks?limit=500{}'.format(api_key)
+    request = requests.get(api_request_link).json()
+    parks = []
+
+    for park in range(len(request['data'])):
+        print(request['data'][park]['fullName'])
+        parks.append(request['data'][park]['fullName'])
+
+    return parks
+
+get_parks()
