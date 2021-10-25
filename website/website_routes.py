@@ -25,7 +25,7 @@ def activities_by_parks(activity):
 
 @views.route('/find-parks', methods=['GET', 'POST'])
 def find_parks():
-    return render_template('find_parks.html', parks=get_parks())
+    return render_template('find_parks.html', parks=get_parks().get('parks'))
 
 
 @views.route('/park/<park_code>/', methods=['GET', 'POST'])

@@ -5,6 +5,14 @@ content %}
 <head>
     <meta charset="UTF-8">
 
+    <style>
+      .card-img-top {
+    width: 100%;
+    height: 50vw;
+    object-fit: cover;
+}
+}
+    </style>
 
 <br><br>
 </head>
@@ -28,7 +36,6 @@ content %}
       {% endif %}
       <h5 class="card-title">{{park_name}} National Park <br> <small>{{city}}, {{state}}</small><br>
       <small>Average Ticket Price: {{avg_cost}}</small></h5>
-<!--      <p>{{'Tags' if tags|length > 0 else ''}}</p>-->
 
     <p class="card-text">{{park_description}}
 
@@ -37,14 +44,24 @@ content %}
     <br>
 
     </p>
+          <a href="{{directions_url}}" class="btn btn-primary" target="_blank">Directions</a>
+                <a href="javascript:window.history.back();" class="btn btn-primary float-right">Change Park</a>
 
-      <!--Map of park -->
+      <script>
+          function previousPage() {
 
-    <a href="{{directions_url}}" class="btn btn-primary" target="_blank">Directions</a>
-  </div>
+          window.history.back();
+          }
+      </script>
+
+</div>
 
 
 </div>
+      <!--Map of park -->
+
+
+
 
 </body>
 </html>

@@ -20,7 +20,7 @@ content %}
     <meta charset="UTF-8">
     <style>
         .list-group{
-    max-height: 300px;
+    max-height: 500px;
     margin-bottom: 10px;
     overflow:scroll;
     -webkit-overflow-scrolling: touch;
@@ -30,7 +30,7 @@ content %}
 </head>
 <body>
 <div class="container">
-  <input class="form-control" id="myInput" type="text" placeholder="Search..">
+  <input class="form-control" id="myInput" type="text" placeholder="Search Activities...">
   <br>
   <ul class="list-group" id="myList">
       {% for activity in range(activities|length) %}
@@ -38,12 +38,16 @@ content %}
     <a href = "/find-park/{{activities[activity]}}"><button class="btn btn-primary float-right" type="submit">Find Parks</button>
         </a>
 </li>
+
               {% endfor %}
 
   </ul>
-
+<br>
+    <br>
 
 </div>
+
+
 
 
 <script>

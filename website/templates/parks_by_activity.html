@@ -19,20 +19,20 @@ content %}
     <br>
     <meta charset="UTF-8">
     <style>
-        .list-group{
-    max-height: 300px;
+       .list-group{
+    max-height: 500px;
     margin-bottom: 10px;
     overflow:scroll;
     -webkit-overflow-scrolling: touch;
 }
+
     </style>
 
 </head>
 <body>
 
-
 <div class="container">
-  <input class="form-control" id="myInput" type="text" placeholder="Search..">
+  <input class="form-control input-lg" id="input-lg" type="text" placeholder="Search Parks...">
   <br>
   <ul class="list-group" id="myList">
       {% for park in range(parks|length) %}
@@ -43,14 +43,19 @@ content %}
               {% endfor %}
 
   </ul>
+    <br>
+<div class="card">
+    <div class="card-body">
 
+        <center><a href = "/find-activity"><button class = "btn btn-outline-primary" type="submit">Change Activity</button></a></center>
+    </div>
+</div>
 
 </div>
 
-
 <script>
 $(document).ready(function(){
-  $("#myInput").on("keyup", function() {
+  $("#input-lg").on("keyup", function() {
     var value = $(this).val().toLowerCase();
     $("#myList li").filter(function() {
       $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
