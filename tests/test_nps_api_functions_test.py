@@ -1,5 +1,5 @@
 from unittest import TestCase
-from api.nps_api_functions import find_park_from_keyword, get_coordinates, get_park_profile, get_activities, get_parks
+from api.nps_api_functions import find_park_from_keyword, get_coordinates, get_park_profile, get_activities, get_parks, get_tags
 
 
 class Test(TestCase):
@@ -24,14 +24,13 @@ class Test(TestCase):
     def test_get_park_profile(self):
 
         function_dict_as_str = str(get_park_profile('acad'))
-        print(function_dict_as_str)
-        assert 'Spread across a wild landscape' in function_dict_as_str
+        assert 'Acadia National Park protects the natural beauty' in function_dict_as_str
         assert 'Acadia' in function_dict_as_str
         assert '23' in function_dict_as_str
         assert 'http://www.nps.gov/acad/planyourvisit/directions.htm' in function_dict_as_str
         assert 'ME' in function_dict_as_str
-        assert 'Patten' in function_dict_as_str
-        assert 'https://www.nps.gov/common/uploads/structured_data/706CD3A6-9835-C974-F5C1ECDF3354177B.jpg' in function_dict_as_str
+        assert 'Bar Harbor' in function_dict_as_str
+        assert 'https://www.nps.gov/common/uploads/structured_data/3C7B45AE-1DD8-B71B-0B7EE131C7DFC2F5.jpg' in function_dict_as_str
 
     def test_get_activities(self):
         activity_list = get_activities()
@@ -43,10 +42,17 @@ class Test(TestCase):
     def test_get_parks(self):
         parks_list = get_parks()
 
-        assert 'Biscayne National Park' in str(parks_list)
-        assert len(parks_list) > 10
-        assert 'Abraham Lincoln Birthplace National Historical Park' in str(parks_list)
+        assert 'Acadia National Park' in str(parks_list)
+        assert len(parks_list) > 0
+        assert 'African American Civil War Memorial' in str(parks_list)
 
+    def test_get_things_to_do(self):
+        things_to_do = get_tags('yell')
+        print(things_to_do)
+        assert 'Yellowstone National Park' in things_to_do
+        assert len(things_to_do) > 0
+        assert 'trail' in things_to_do
+        assert 'moderate hike' in things_to_do
 
 
 

@@ -36,20 +36,21 @@ def get_coordinates(park_code):
 def grab_webcam_metadata(park_code):
     api_request_link = 'https://developer.nps.gov/api/v1/webcams?q={}{}'.format(park_code, api_key)
     request = requests.get(api_request_link).json()
-    print(str(request['data'][0]))
 
 
 def get_park_profile(park_code):
-    api_request_link = 'https://developer.nps.gov/api/v1/parks?q={}&limit=1000{}'.format(park_code, api_key)
+    api_request_link = 'https://developer.nps.gov/api/v1/parks?parkCode={}{}'.format(park_code, api_key)
     request = requests.get(api_request_link).json()
+    print(str(request))
     try:
-        park_description = request['data'][1]['description']
+        park_description = request['data'][0]['description']
         city = request['data'][1]['addresses'][0]['city']
         state = request['data'][1]['addresses'][0]['stateCode']
         park_pic = request['data'][1]['images'][0]['url']
 
     except IndexError:
         park_description = request['data'][0]['description']
+
         city = request['data'][0]['addresses'][0]['city']
         state = request['data'][0]['addresses'][0]['stateCode']
         park_pic = request['data'][0]['images'][0]['url']
@@ -62,12 +63,16 @@ def get_park_profile(park_code):
         sum = sum + float(cost)
         counter = counter + 1
 
-    avg_cost = sum / counter
+    if counter == 0:
+        avg_cost = 0
+    else:
+        avg_cost = sum / counter
+        avg_cost = round(avg_cost)
 
     return {
         "park_description": park_description,
         "park_name": request['data'][0]['name'],
-        "avg_cost": round(avg_cost),
+        "avg_cost": avg_cost,
         "directions_url": request['data'][0]['directionsUrl'],
         "city": city,
         "state": state,
@@ -90,11 +95,28 @@ def get_parks():
     api_request_link = 'https://developer.nps.gov/api/v1/parks?limit=500{}'.format(api_key)
     request = requests.get(api_request_link).json()
     parks = []
+    park_codes = []
 
     for park in range(len(request['data'])):
-        print(request['data'][park]['fullName'])
         parks.append(request['data'][park]['fullName'])
+        park_codes.append(request['data'][park]['parkCode'])
 
-    return parks
+    return {
+        "parks": parks,
+        "park_codes": park_codes
+    }
 
-get_parks()
+
+def get_tags(park_code):
+    api_request_link = 'https://developer.nps.gov/api/v1/thingstodo?parkCode={}{}'.format(park_code, api_key)
+    request = requests.get(api_request_link).json()
+    counter = 0
+    things_to_do = []
+    try:
+        while counter < 4:
+            things_to_do.append(request['data'][0]['tags'][counter])
+            counter = counter + 1
+    except IndexError:
+        things_to_do = []
+
+    return things_to_do
