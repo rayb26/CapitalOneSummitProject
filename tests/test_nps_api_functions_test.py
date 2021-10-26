@@ -1,5 +1,6 @@
 from unittest import TestCase
-from api.nps_api_functions import find_park_from_keyword, get_coordinates, get_park_profile, get_activities, get_parks, get_tags
+from api.nps_api_functions import find_park_from_keyword, get_coordinates, get_park_profile, get_activities, get_parks, \
+    get_tags, grab_webcam_metadata
 
 
 class Test(TestCase):
@@ -26,6 +27,7 @@ class Test(TestCase):
         function_dict_as_str = str(get_park_profile('acad'))
         assert 'Acadia National Park protects the natural beauty' in function_dict_as_str
         assert 'Acadia' in function_dict_as_str
+        assert 'Acadia National Park' in function_dict_as_str
         assert '23' in function_dict_as_str
         assert 'http://www.nps.gov/acad/planyourvisit/directions.htm' in function_dict_as_str
         assert 'ME' in function_dict_as_str
@@ -48,12 +50,17 @@ class Test(TestCase):
 
     def test_get_things_to_do(self):
         things_to_do = get_tags('yell')
-        print(things_to_do)
         assert 'Yellowstone National Park' in things_to_do
         assert len(things_to_do) > 0
         assert 'trail' in things_to_do
         assert 'moderate hike' in things_to_do
 
-
+    def test_grab_webcam_data(self):
+        web_cam_data = grab_webcam_metadata('acad')
+        assert len(web_cam_data) > 0
+        assert '.jpg' in str(web_cam_data)
+        web_cam_data = grab_webcam_metadata('adam')
+        assert len(web_cam_data) == 0
+        assert '.jpg' not in str(web_cam_data)
 
 

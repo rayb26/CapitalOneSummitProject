@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, request, flash, make_response
-from api.nps_api_functions import get_park_profile, get_activities, find_park_from_keyword, get_parks, get_tags
+from api.nps_api_functions import get_park_profile, get_activities, find_park_from_keyword, get_parks, get_tags, \
+    grab_webcam_metadata
 
 views = Blueprint('views', __name__)
 
@@ -31,6 +32,7 @@ def find_parks():
 @views.route('/park/<park_code>/', methods=['GET', 'POST'])
 def park_info(park_code):
     park_code = __convert_park_code_from_name__(park_code)
+    webcams = grab_webcam_metadata(park_code)
 
     park_profile = get_park_profile(park_code)
     park_name = park_profile.get('park_name')
@@ -49,7 +51,7 @@ def park_info(park_code):
 
     return render_template('park_info.html', park_name=park_name, park_description=park_description,
                            avg_cost=avg_cost, directions_url=directions_url, city=city, state=state, park_pic=park_pic,
-                           tags=tags)
+                           tags=tags, webcams=webcams)
 
 
 @views.route('/show_map', methods=['GET', 'POST'])

@@ -34,14 +34,26 @@ def get_coordinates(park_code):
 
 
 def grab_webcam_metadata(park_code):
-    api_request_link = 'https://developer.nps.gov/api/v1/webcams?q={}{}'.format(park_code, api_key)
+    api_request_link = 'https://developer.nps.gov/api/v1/webcams?parkCode={}{}'.format(park_code, api_key)
+
     request = requests.get(api_request_link).json()
+
+    webcam_links = []
+
+    for data in range(len(request['data'])):
+
+        try:
+            webcam_links.append(request['data'][data]['images'][0]['url'])
+
+        except IndexError:
+            continue
+
+    return webcam_links
 
 
 def get_park_profile(park_code):
     api_request_link = 'https://developer.nps.gov/api/v1/parks?parkCode={}{}'.format(park_code, api_key)
     request = requests.get(api_request_link).json()
-    print(str(request))
     try:
         park_description = request['data'][0]['description']
         city = request['data'][1]['addresses'][0]['city']
@@ -71,7 +83,7 @@ def get_park_profile(park_code):
 
     return {
         "park_description": park_description,
-        "park_name": request['data'][0]['name'],
+        "park_name": (request['data'][0]['fullName']),
         "avg_cost": avg_cost,
         "directions_url": request['data'][0]['directionsUrl'],
         "city": city,

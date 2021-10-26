@@ -8,7 +8,7 @@ content %}
     <style>
       .card-img-top {
     width: 100%;
-    height: 50vw;
+    height: 25vw;
     object-fit: cover;
 }
 }
@@ -29,12 +29,13 @@ content %}
       {% for tag in tags %}
 <span class="badge badge-pill badge-primary">{{tag}}</span>
 {% endfor %}
+      <a href="javascript:window.history.back();" class="btn btn-outline-primary float-right btn-sm" data-toggle="modal" data-target="#exampleModal">View Webcams</a>
 
       {% if tags %}
       <br>
 <br>
       {% endif %}
-      <h5 class="card-title">{{park_name}} National Park <br> <small>{{city}}, {{state}}</small><br>
+      <h5 class="card-title">{{park_name}}<br> <small>{{city}}, {{state}}</small><br>
       <small>Average Ticket Price: {{avg_cost}}</small></h5>
 
     <p class="card-text">{{park_description}}
@@ -45,7 +46,10 @@ content %}
 
     </p>
           <a href="{{directions_url}}" class="btn btn-primary" target="_blank">Directions</a>
+
                 <a href="javascript:window.history.back();" class="btn btn-primary float-right">Change Park</a>
+
+
 
       <script>
           function previousPage() {
@@ -58,8 +62,35 @@ content %}
 
 
 </div>
-      <!--Map of park -->
 
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Webcams for {{park_name}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+          {% if not webcams %}
+
+          <p>Unfortunately, webcams for {{park_name}} National Park are inactive</p>
+            {% endif %}
+
+          {% for webcam in webcams %}
+          <img src="{{webcam}}" alt="Webcam" width=100% height= auto >
+          {% endfor %}
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 
