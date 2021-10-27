@@ -1,6 +1,11 @@
 import requests
+from decouple import config
+api_key = config('KEY')
 
-api_key = '&api_key=6uJcmYK3Buc4KNEaeKcbzh7PRwjD1bN7zJX2Maxo'
+"""
+Method returns a dictionary containing park data that is passed into the parameter. Specifically, the data that 
+gets returned for each park is its name, url, and code. 
+"""
 
 
 def find_park_from_keyword(keyword):
@@ -23,6 +28,12 @@ def find_park_from_keyword(keyword):
     }
 
 
+"""
+Method returns a dictionary containing geographical data of the park that is passed into the parameter. 
+This data includes the park's longitude and latitude 
+"""
+
+
 def get_coordinates(park_code):
     api_request_link = 'https://developer.nps.gov/api/v1/parks?parkCode={}{}'.format(park_code, api_key)
     request = requests.get(api_request_link).json()
@@ -31,6 +42,12 @@ def get_coordinates(park_code):
         "longitude": request['data'][0]['longitude'],
         "latitude": request['data'][0]['latitude']
     }
+
+
+"""
+Method returns list of webcam urls for a specific park that is passed into the method. Some parks do not have active
+webcams, so the method will return an empty list if the webcam data is not obtained. 
+"""
 
 
 def grab_webcam_metadata(park_code):
