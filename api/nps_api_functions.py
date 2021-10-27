@@ -1,6 +1,6 @@
 import requests
-from decouple import config
-api_key = config('KEY')
+import os
+api_key = os.environ['KEY']
 
 """
 Method returns a dictionary containing park data that is passed into the parameter. Specifically, the data that 
