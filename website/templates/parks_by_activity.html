@@ -10,6 +10,8 @@ content %}
     <br>
     <br>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript"
+            src="{{ url_for('static', filename='search.js') }}"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js">
   </script>
 
@@ -32,7 +34,7 @@ content %}
 <body>
 
 <div class="container">
-  <input class="form-control input-lg" id="input-lg" type="text" placeholder="Search Parks...">
+  <input class="form-control input-lg" id="searchInput" type="text" placeholder="Search Parks...">
   <br>
   <ul class="list-group" id="myList">
       {% for park in range(parks|length) %}
@@ -52,17 +54,6 @@ content %}
 </div>
 
 </div>
-
-<script>
-$(document).ready(function(){
-  $("#input-lg").on("keyup", function() {
-    var value = $(this).val().toLowerCase();
-    $("#myList li").filter(function() {
-      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-    });
-  });
-});
-</script>
 
 
 

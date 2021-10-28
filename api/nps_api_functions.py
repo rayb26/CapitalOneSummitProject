@@ -1,6 +1,19 @@
+"""
+Author: Rayhan Biju
+Version: October 27, 2021
+Description: Code contains necessary logic to parse the National Park Service's API for related information
+for the web app such as the park's name, images, description, webcam data, and more. All code within this file has been
+tested and received 100% code coverage on the tests/test_nps_api_functions_test.py file.
+"""
 import requests
 import os
-api_key = os.environ['KEY']
+
+"""
+The API key for the National Park Service API is stored as an environment variable both locally and on Heroku when 
+deployed.
+"""
+#api_key = os.environ['KEY']
+api_key = '&api_key=6uJcmYK3Buc4KNEaeKcbzh7PRwjD1bN7zJX2Maxo'
 
 """
 Method returns a dictionary containing park data that is passed into the parameter. Specifically, the data that 
@@ -68,6 +81,13 @@ def grab_webcam_metadata(park_code):
     return webcam_links
 
 
+"""
+Method returns dictionary of data related to park that is passed as a parameter to this method such as the park's
+description, full name, average ticket price, directions, city, state, and a picture of it. A dictionary was used to 
+group related data sets into one dictionary data structure and to limit API calls while optimizing efficiency. 
+"""
+
+
 def get_park_profile(park_code):
     api_request_link = 'https://developer.nps.gov/api/v1/parks?parkCode={}{}'.format(park_code, api_key)
     request = requests.get(api_request_link).json()
@@ -85,17 +105,19 @@ def get_park_profile(park_code):
         park_pic = request['data'][0]['images'][0]['url']
 
     entrance_fees_arr_length = len(request['data'][0]['entranceFees'])
-    sum = 0
+
+    # Average ticket price is getting calculated
+    sum_of_cost = 0
     counter = 0
     for each_cost_field in range(entrance_fees_arr_length):
         cost = request['data'][0]['entranceFees'][each_cost_field]['cost']
-        sum = sum + float(cost)
+        sum_of_cost = sum_of_cost + float(cost)
         counter = counter + 1
 
     if counter == 0:
         avg_cost = 0
     else:
-        avg_cost = sum / counter
+        avg_cost = sum_of_cost / counter
         avg_cost = round(avg_cost)
 
     return {
@@ -109,6 +131,11 @@ def get_park_profile(park_code):
     }
 
 
+"""
+Method returns a list of activities that all national parks have. 
+"""
+
+
 def get_activities():
     api_request_link = 'https://developer.nps.gov/api/v1/activities?{}'.format(api_key)
     request = requests.get(api_request_link).json()
@@ -118,6 +145,11 @@ def get_activities():
         activities.append(request['data'][activity]['name'])
 
     return activities
+
+
+"""
+Method returns a dictionary of all parks operated by the National Park Service and each park's park codes.
+"""
 
 
 def get_parks():
@@ -134,6 +166,12 @@ def get_parks():
         "parks": parks,
         "park_codes": park_codes
     }
+
+
+"""
+Method returns a list of related tags that each park has. In some cases, parks may not have related tags, so a try 
+except code structure was followed.
+"""
 
 
 def get_tags(park_code):

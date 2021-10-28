@@ -4,14 +4,15 @@
 content %}
 
 
-
 <html lang="en">
 <head>
     <br>
     <br>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js">
-  </script>
+    <script type="text/javascript"
+            src="{{ url_for('static', filename='search.js') }}"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js">
+    </script>
 
 
     <center><h1 style="color:white">Find Parks</h1></center>
@@ -25,39 +26,27 @@ content %}
     overflow:scroll;
     -webkit-overflow-scrolling: touch;
 }
+
     </style>
 
 </head>
 <body>
 <div class="container">
-  <input class="form-control" id="myInput" type="text" placeholder="Search Parks...">
-  <br>
-  <ul class="list-group" id="myList">
-      {% for park in range(parks|length) %}
-    <li class="list-group-item">{{parks[park]}}
-   <a href = "/park/{{parks[park]}}"><button class="btn btn-primary float-right" type="submit">Explore</button>
-      </a>
-</li>
-              {% endfor %}
+    <input class="form-control" id="searchInput" type="text" placeholder="Search Parks...">
+    <br>
+    <ul class="list-group" id="myList">
+        {% for park in range(parks|length) %}
+        <li class="list-group-item">{{parks[park]}}
+            <a href="/park/{{parks[park]}}">
+                <button class="btn btn-primary float-right" type="submit">Explore</button>
+            </a>
+        </li>
+        {% endfor %}
 
-  </ul>
+    </ul>
 
 
 </div>
-
-
-<script>
-$(document).ready(function(){
-  $("#myInput").on("keyup", function() {
-    var value = $(this).val().toLowerCase();
-    $("#myList li").filter(function() {
-      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-    });
-  });
-});
-</script>
-
-
 
 </body>
 </html>
