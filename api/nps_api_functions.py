@@ -19,7 +19,6 @@ Method returns a dictionary containing park data that is passed into the paramet
 gets returned for each park is its name, url, and code. 
 """
 
-
 def find_park_from_keyword(keyword):
     park_list = []
     park_urls = []
