@@ -1,23 +1,36 @@
+<!---
+Author: Rayhan Biju
+Version: October 28, 2021
+Description: The following html file contains functionality to display all activities that the National Park Service
+API contains. This HTML file has various parameters passed into it from the website_routes.py file, and therefore, has
+dynamic content. Additionally, this HTML file was created with Bootstrap.
+-->
 <!DOCTYPE html>
-
+<!---
+This HTML file extends the base.html file to extend components such as the navigation bar or background.
+-->
 {% extends "base.html" %}Find Activity{% block title %}{{park_name}} Info{% endblock %} {% block
 content %}
-
-
 
 <html lang="en">
 <head>
     <br>
     <br>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js">
-  </script>
+     <script type="text/javascript"
+            src="{{ url_for('static', filename='search.js') }}"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js">
+    </script>
 
 
     <center><h1 style="color:white"> Find Parks Based on Activity </h1></center>
     <br>
     <br>
     <meta charset="UTF-8">
+    <!--
+    The following css script allows the list of activities to be larger and scrollable. It does not matter if the client
+    is on mobile, the list will still be scrollable.
+    -->
     <style>
         .list-group{
     max-height: 500px;
@@ -25,42 +38,34 @@ content %}
     overflow:scroll;
     -webkit-overflow-scrolling: touch;
 }
+
     </style>
 
 </head>
 <body>
+<!--
+The following div contains functionality to show the list of activities and dynamically generates the list based
+on the list of activities passed in from the website_routes.py file. The Jinja2 framework is leveraged to show this
+dynamically generated data.
+-->
 <div class="container">
-  <input class="form-control" id="myInput" type="text" placeholder="Search Activities...">
-  <br>
-  <ul class="list-group" id="myList">
-      {% for activity in range(activities|length) %}
-    <li class="list-group-item">{{activities[activity]}}
-    <a href = "/find-park/{{activities[activity]}}"><button class="btn btn-primary float-right" type="submit">Find Parks</button>
-        </a>
-</li>
+    <input class="form-control" id="searchInput" type="text" placeholder="Search Activities...">
+    <br>
+    <ul class="list-group" id="myList">
+        {% for activity in range(activities|length) %}
+        <li class="list-group-item">{{activities[activity]}}
+            <a href="/find-park/{{activities[activity]}}">
+                <button class="btn btn-primary float-right" type="submit">Find Parks</button>
+            </a>
+        </li>
 
-              {% endfor %}
+        {% endfor %}
 
-  </ul>
-<br>
+    </ul>
+    <br>
     <br>
 
 </div>
-
-
-
-
-<script>
-$(document).ready(function(){
-  $("#myInput").on("keyup", function() {
-    var value = $(this).val().toLowerCase();
-    $("#myList li").filter(function() {
-      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-    });
-  });
-});
-</script>
-
 
 
 </body>
