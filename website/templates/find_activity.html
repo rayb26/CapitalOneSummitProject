@@ -5,9 +5,8 @@ Description: This HTML file contains front-end functionality to show a list of a
 activities. This list is dynamically generated and is passed from the
 website_routes.py file and parsed through the Jinja2 framework on this file.
 -->
-<!DOCTYPE html>
 
-{% extends "base.html" %}Find Activity{% block title %}{{park_name}} Info{% endblock %} {% block
+{% extends "base.html" %}{% block title %}{{park_name}}Find Activity{% endblock %} {% block
 content %}
 
 
@@ -15,11 +14,6 @@ content %}
 <head>
     <br>
     <br>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-     <script type="text/javascript"
-            src="{{ url_for('static', filename='search.js') }}"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js">
-  </script>
 
 
     <center><h1 style="color:white"> Find Parks Based on Activity </h1></center>
@@ -56,5 +50,4 @@ This class is also linked to a Jquery script on static/search.js that will allow
 
 
 </body>
-</html>
 {% endblock %}

@@ -12,8 +12,8 @@ import os
 The API key for the National Park Service API is stored as an environment variable both locally and on Heroku when 
 deployed.
 """
-# api_key = os.environ['KEY']
-api_key = '&api_key=6uJcmYK3Buc4KNEaeKcbzh7PRwjD1bN7zJX2Maxo'
+api_key = os.environ['KEY']
+
 """
 Method returns a dictionary containing park data that is passed into the parameter. Specifically, the data that 
 gets returned for each park is its name, url, and code. 

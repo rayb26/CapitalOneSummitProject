@@ -5,19 +5,14 @@ Descripton: This HTML file contains functionality to show a dynamically generate
 with a particular National Park Service activity. This list is passed from the website_routs.py file and parsed using
 the Jinja2 front-end framework.
 -->
-<!DOCTYPE html>
 
-{% extends "base.html" %}Find Parks based on Activity{% block title %}{{park_name}} Info{% endblock %} {% block
+{% extends "base.html" %}{% block title %}{{park_name}}Find Parks based on Activity{% endblock %} {% block
 content %}
 
 <html lang="en">
 <head>
     <br>
     <br>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script type="text/javascript"
-            src="{{ url_for('static', filename='search.js') }}"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js">
   </script>
 
 
@@ -67,5 +62,4 @@ static/search.js.
 
 
 </body>
-</html>
 {% endblock %}
