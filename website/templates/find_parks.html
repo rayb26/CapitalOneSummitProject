@@ -8,7 +8,7 @@ is implemented in Jquery and the script is linked to this file, but the script i
 -->
 
 
-{% extends "base.html" %}Find Activity{% block title %}{{park_name}}Find Parks{% endblock %} {% block
+{% extends "base.html" %}{% block title %}{{park_name}}Find Parks{% endblock %} {% block
 content %}
 
 
@@ -24,7 +24,7 @@ content %}
     <meta charset="UTF-8">
     <style>
         .list-group{
-    max-height: 500px;
+    max-height: 300px;
     margin-bottom: 10px;
     overflow:scroll;
     -webkit-overflow-scrolling: touch;
