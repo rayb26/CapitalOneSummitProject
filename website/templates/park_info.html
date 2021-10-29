@@ -1,4 +1,10 @@
-{% extends "base.html" %} {% block title %}{{park_name}} Info{% endblock %} {% block
+<!--
+Author: Rayhan Biju
+Version: October 28, 2021
+Description: This HTML file has uses a card-view layout to display information about a specific park such as its price,
+description, webcams, related tags, and more.
+-->
+{% extends "base.html" %} {% block title %}{{park_name}}{{park_name}} Info{% endblock %} {% block
 content %}
 
 <html lang="en">
@@ -12,79 +18,87 @@ content %}
     object-fit: cover;
 }
 }
+
+
     </style>
 
-<br><br>
+    <br><br>
 </head>
 <body>
 
-
+<!--
+The following card div displays information about the park in a card-view layout.
+-->
 <div class="card" style="width: 80;">
 
-  <img class="card-img-top" src="{{park_pic}}" alt="Card image cap">
+    <img class="card-img-top" src="{{park_pic}}" alt="Card image cap">
 
 
-  <div class="card-body">
+    <div class="card-body">
+        <!--
+        The related tags for the park are dynamically generated here.
+        -->
+        {% for tag in tags %}
+        <span class="badge badge-pill badge-primary">{{tag}}</span>
+        {% endfor %}
+        <a href="javascript:window.history.back();" class="btn btn-outline-primary float-right btn-sm"
+           data-toggle="modal" data-target="#exampleModal">View Webcams</a>
 
-      {% for tag in tags %}
-<span class="badge badge-pill badge-primary">{{tag}}</span>
-{% endfor %}
-      <a href="javascript:window.history.back();" class="btn btn-outline-primary float-right btn-sm" data-toggle="modal" data-target="#exampleModal">View Webcams</a>
+        {% if tags %}
+        <br>
+        <br>
+        {% endif %}
+        <h5 class="card-title">{{park_name}}<br> <small>{{city}}, {{state}}</small><br>
+            <small>Average Ticket Price: {{avg_cost}}</small></h5>
 
-      {% if tags %}
-      <br>
-<br>
-      {% endif %}
-      <h5 class="card-title">{{park_name}}<br> <small>{{city}}, {{state}}</small><br>
-      <small>Average Ticket Price: {{avg_cost}}</small></h5>
-
-    <p class="card-text">{{park_description}}
-
-
-
-    <br>
-
-    </p>
-          <a href="{{directions_url}}" class="btn btn-primary" target="_blank">Directions</a>
-
-                <a href="javascript:window.history.back();" class="btn btn-primary float-right">Change Park</a>
+        <p class="card-text">{{park_description}}
 
 
+            <br>
 
-</div>
+        </p>
+        <a href="{{directions_url}}" class="btn btn-primary" target="_blank">Directions</a>
 
-
-</div>
-
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Webcams for {{park_name}}</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-
-          {% if not webcams %}
-
-          <p>Unfortunately, webcams for {{park_name}} National Park are inactive</p>
-            {% endif %}
-
-          {% for webcam in webcams %}
-          <img src="{{webcam}}" alt="Webcam" width=100% height= auto >
-          {% endfor %}
+        <a href="javascript:window.history.back();" class="btn btn-primary float-right">Change Park</a>
 
 
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
     </div>
-  </div>
-</div>
 
+
+</div>
+<!--
+The following modal is active when the client clicks the 'show webcams' button on the front-end, which will then
+show the webcams for the park. If there is no webcam data to show, a message will be shown.
+-->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Webcams for {{park_name}}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                {% if not webcams %}
+
+                <p>Unfortunately, webcams for {{park_name}} National Park are inactive</p>
+                {% endif %}
+
+                {% for webcam in webcams %}
+                <img src="{{webcam}}" alt="Webcam" width=100% height=auto>
+                {% endfor %}
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 </body>

@@ -1,8 +1,8 @@
 <!--
 Author: Rayhan Biju
 Version: October 28, 2021
-Description: This HTML file contains front-end functionality to show a list of all the parks associated with
-a particular National Park Service activity. This list is dynamically generated and is passed from the
+Description: This HTML file contains front-end functionality to show a list of all the National Park Service
+activities. This list is dynamically generated and is passed from the
 website_routes.py file and parsed through the Jinja2 framework on this file.
 -->
 <!DOCTYPE html>
@@ -42,7 +42,7 @@ The following container div allows the list of parks associated with an activity
 This class is also linked to a Jquery script on static/search.js that will allow clients to search the list.
 -->
 <div class="container">
-  <input class="form-control" id="myInput" type="text" placeholder="Search..">
+  <input class="form-control" id="myInput" type="text" placeholder="Search Activities..">
   <br>
   <ul class="list-group" id="myList">
       {% for activity in range(activities|length) %}

@@ -1,9 +1,14 @@
+<!--
+Author: Rayhan Biju
+Version: October 28, 2021
+Descripton: This HTML file contains functionality to show a dynamically generated list of the parks associated 
+with a particular National Park Service activity. This list is passed from the website_routs.py file and parsed using
+the Jinja2 front-end framework.
+-->
 <!DOCTYPE html>
 
-{% extends "base.html" %}Find Activity{% block title %}{{park_name}} Info{% endblock %} {% block
+{% extends "base.html" %}Find Parks based on Activity{% block title %}{{park_name}} Info{% endblock %} {% block
 content %}
-
-
 
 <html lang="en">
 <head>
@@ -32,7 +37,11 @@ content %}
 
 </head>
 <body>
-
+<!--
+The following container div allows the client to view the list of parks associated with an activity and the client
+is able to search through the list. This specific search functionality is developed using Jquery and is in
+static/search.js.
+-->
 <div class="container">
   <input class="form-control input-lg" id="searchInput" type="text" placeholder="Search Parks...">
   <br>
