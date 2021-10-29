@@ -1,6 +1,14 @@
+<!---
+Author: Rayhan Biju
+Version: October 28, 2021
+Description: This HTML file contains the functionality that allows clients to search parks from a list of parks, and
+the list is dynamically generated ans passed into this file from the website_routes.py file. The search functionality
+is implemented in Jquery and the script is linked to this file.
+-->
+
 <!DOCTYPE html>
 
-{% extends "base.html" %}Find Activity{% block title %}{{park_name}} Info{% endblock %} {% block
+{% extends "base.html" %}Find Activity{% block title %}{{park_name}}Find Parks{% endblock %} {% block
 content %}
 
 
@@ -27,10 +35,15 @@ content %}
     -webkit-overflow-scrolling: touch;
 }
 
+
     </style>
 
 </head>
 <body>
+<!--
+The following container contains functionality to dynamically generate all parks that the National Park Service
+operates on the front-end. There is a button on each list that will take the client to an info page about the park.
+-->
 <div class="container">
     <input class="form-control" id="searchInput" type="text" placeholder="Search Parks...">
     <br>

@@ -1,8 +1,14 @@
+<!--
+Author: Rayhan Biju
+Version: October 28, 2021
+Description: This HTML file contains front-end functionality to show a list of all the parks associated with
+a particular National Park Service activity. This list is dynamically generated and is passed from the
+website_routes.py file and parsed through the Jinja2 framework on this file.
+-->
 <!DOCTYPE html>
 
 {% extends "base.html" %}Find Activity{% block title %}{{park_name}} Info{% endblock %} {% block
 content %}
-
 
 
 <html lang="en">
@@ -10,6 +16,8 @@ content %}
     <br>
     <br>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+     <script type="text/javascript"
+            src="{{ url_for('static', filename='search.js') }}"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js">
   </script>
 
@@ -29,7 +37,10 @@ content %}
 
 </head>
 <body>
-
+<!--
+The following container div allows the list of parks associated with an activity to be dynamically generated.
+This class is also linked to a Jquery script on static/search.js that will allow clients to search the list.
+-->
 <div class="container">
   <input class="form-control" id="myInput" type="text" placeholder="Search..">
   <br>
@@ -40,20 +51,7 @@ content %}
 
   </ul>
 
-
 </div>
-
-
-<script>
-$(document).ready(function(){
-  $("#myInput").on("keyup", function() {
-    var value = $(this).val().toLowerCase();
-    $("#myList li").filter(function() {
-      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-    });
-  });
-});
-</script>
 
 
 
