@@ -32,9 +32,9 @@ def find_activity():
 
 
 """
-Function contains logic to show the parks_by_activity.html page if the '/find-park/<activity>' directory is 
+Function contains logic to show the find_parks_by_activity.html page if the '/find-park/<activity>' directory is 
 accessed by the client, and the '<activity>' value represents a parameter than can be passed in by the client. 
-Also, a list of the park names and activity type is passed into the 'parks_by_activity.html' page to be later 
+Also, a list of the park names and activity type is passed into the 'find_parks_by_activity.html' page to be later 
 manipulated by the Jinja2 framework.
 """
 
@@ -44,7 +44,7 @@ def activities_by_parks(activity):
     park_by_activity_dict = find_park_from_keyword(activity)
     parks = park_by_activity_dict.get('park_name')
 
-    return render_template('parks_by_activity.html', parks=parks, activity=activity)
+    return render_template('find_parks_by_activity.html', parks=parks, activity=activity)
 
 
 """

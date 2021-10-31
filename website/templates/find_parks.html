@@ -7,9 +7,8 @@ parsed to the front-end here using the Jinja2 front-end framework. The search fu
 is implemented in Jquery and the script is linked to this file, but the script itself is on static/search.js.
 -->
 
-<!DOCTYPE html>
 
-{% extends "base.html" %}Find Activity{% block title %}{{park_name}}Find Parks{% endblock %} {% block
+{% extends "base.html" %}{% block title %}{{park_name}}Find Parks{% endblock %} {% block
 content %}
 
 
@@ -17,11 +16,6 @@ content %}
 <head>
     <br>
     <br>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script type="text/javascript"
-            src="{{ url_for('static', filename='search.js') }}"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js">
-    </script>
 
 
     <center><h1 style="color:white">Find Parks</h1></center>
@@ -30,7 +24,7 @@ content %}
     <meta charset="UTF-8">
     <style>
         .list-group{
-    max-height: 500px;
+    max-height: 300px;
     margin-bottom: 10px;
     overflow:scroll;
     -webkit-overflow-scrolling: touch;
@@ -63,5 +57,4 @@ operates on the front-end. There is a button on each list that will take the cli
 </div>
 
 </body>
-</html>
 {% endblock %}
