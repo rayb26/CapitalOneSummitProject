@@ -1,6 +1,6 @@
 <!---
 Author: Rayhan Biju
-Version: October 28, 2021
+Version: October 30, 2021
 Description: This HTML is the parent file to the other HTML files in this repository, and contains functionality
 for the navigation bar, showing the background gif, various BootStrap JavaScript files, and the flash messages
 -->
@@ -27,7 +27,7 @@ for the navigation bar, showing the background gif, various BootStrap JavaScript
 
     <style>
       body{
-    background-image: url('https://i.gifer.com/CUD.gif');
+    background-image: url('https://images.unsplash.com/photo-1488441770602-aed21fc49bd5?ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8eW9zZW1pdGV8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80');
     background-size: cover;
     height: 100vh;
     padding:0;
@@ -63,6 +63,8 @@ for the navigation bar, showing the background gif, various BootStrap JavaScript
         </div>
     </div>
 </nav>
+
+
 <!---
 The flash messaging system is initialized here.
 -->
@@ -106,5 +108,6 @@ messages %} {% for category, message in messages %} {% if category ==
         type="text/javascript"
         src="{{ url_for('static', filename='index.js') }}"
 ></script>
+
 </body>
 </html>
