@@ -2,6 +2,10 @@
 
 A Flask based web application that allows users to find parks based on activities, search for parks, and learn more information about them. 
 
+# Website
+You can see the web application in action in the following link: 
+https://npsinfocenter.herokuapp.com/
+
 ## Description
 
 As a submission for the Capital One Winter Cohort, this project aims at giving clients the most ease when trying to learn more about the National Parks in the United States and what types of activities people participate in from boating to camping. This web application provides an easy to use interface along with a sophisticated backend system to allow more optimal efficiency. The actual app itself features a home page that displays a slideshow of features, a page titled "Find Parks by Activity" that allows users to search through a list of 70+ activities from the National Park Service and find parks that provide that particular activity, and a page titled "Find Parks" that allow users to search from over 400 parks within the app alone. 
