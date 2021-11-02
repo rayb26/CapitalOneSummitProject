@@ -15,7 +15,8 @@ This project uses the National Park Service API that allows clients to obtain in
 
 ## Obstacles Faced
 * Many parks do not have webcam data since a lot of the webcams were deactivated, making sure these edge cases did not create substantial issues, I formatted the backend and front-end logic to account for a park not having webcam data shown here where the popup says "Unfortunately, webcams for African Burial Ground National Monument National Park are inactive": <img width="1786" alt="Screen Shot 2021-11-02 at 12 23 03 PM" src="https://user-images.githubusercontent.com/64879192/139905517-ef056d2e-f8ee-4b78-a40f-89ba7c8ccdb2.png">
-* Additionally, some parks contained varying data access points from within the API, so parsing this data resulted in index errors. To account for this, I used try and except blocks to catch the Python "IndexError" and access the data from another point. This was also why my Python unit testing was a great help since I was able to identify errors with the backend before implementation such features on the front-end. 
+* Additionally, some parks contained varying data access points from within the API, so parsing this data resulted in index errors. To account for this, I used try and except blocks to catch the Python "IndexError" and access the data from another point. This was also why my Python unit testing was a great help since I was able to identify errors with the backend before implementation such features on the front-end.
+
 
 ## Areas of Improvement
 * One area of improvement could be making the front page more mobile device friendly. Although the majority of the web app is functional and readable on mobile devices, the images in the slideshow especially may need to be more mobile friendly. 
