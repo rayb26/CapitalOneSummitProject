@@ -38,8 +38,15 @@ The following card div displays information about the park in a card-view layout
         <!--
         The related tags for the park are dynamically generated here.
         -->
+
+        {% if tags %}
+        Related Tags
+        <br>
+
+        {% endif %}
+
         {% for tag in tags %}
-        <span class="badge badge-pill badge-primary">{{tag}}</span>
+        <span class="badge badge-pill badge-primary">#{{tag}}</span>
         {% endfor %}
         <a href="javascript:window.history.back();" class="btn btn-outline-primary float-right btn-sm"
            data-toggle="modal" data-target="#exampleModal">View Webcams</a>

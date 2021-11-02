@@ -32,6 +32,18 @@ for the navigation bar, showing the background gif, various BootStrap JavaScript
     height: 100vh;
     padding:0;
     margin:0;
+    }
+    .footer {
+   position: fixed;
+   left: 0;
+   bottom: 0;
+   width: 100%;
+   background-color: rgba(210, 196, 204, 0.8);
+   color: black;
+   text-align: center;
+   box-shadow: 3px 4px 5px 6px #000;
+
+
 }
 
     </style>
@@ -87,6 +99,8 @@ messages %} {% for category, message in messages %} {% if category ==
 </div>
 {% endif %} {% endfor %} {% endif %} {% endwith %}
 
+
+
 <div class="container">{% block content %} {% endblock %}</div>
 <script
         src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
@@ -114,6 +128,9 @@ messages %} {% for category, message in messages %} {% if category ==
 ></script>
 <script type="text/javascript"
             src="{{ url_for('static', filename='search.js') }}"></script>
-
+<div class="footer">
+    <p style="font-size:20px;">NPS Information Center</p>
+</div>
 </body>
+
 </html>
