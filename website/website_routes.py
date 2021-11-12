@@ -92,12 +92,6 @@ def park_info(park_code):
                            avg_cost=avg_cost, directions_url=directions_url, city=city, state=state, park_pic=park_pic,
                            tags=tags, webcams=webcams)
 
-
-@views.route('/show_map', methods=['GET', 'POST'])
-def show_map():
-    return "<p> Hello world </p>"
-
-
 """
 Private function converts a park's name to its corresponding park code and returns None if the park's code does not 
 exist. 
